@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# boot a compute node for testing ansible config
+
+FLAVOR=m1.small
+IMAGE="CentOS 7 x86_64-GenericCloud-1503"
+NAME=$1
+OS_KEYNAME=${OS_KEYNAME?Export OS_KEYNAME to select auth key}
+
+nova boot --flavor $FLAVOR \
+          --image "$IMAGE" \
+          --key-name $OS_KEYNAME \
+          --security-groups default \
+          $NAME
