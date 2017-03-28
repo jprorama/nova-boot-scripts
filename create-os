@@ -3,7 +3,15 @@
 # boot a compute node for testing ansible config
 
 FLAVOR=m1.small
-IMAGE="CentOS 7 x86_64-GenericCloud-1503"
+imagetype=`echo $0 | cut -d- -f 2`
+if [ $imagetype == "centos7" ]
+then
+  IMAGE="CentOS 7 x86_64-GenericCloud-1503"
+elif [ $imagetype == "u1404" ]
+then
+  IMAGE="trusty-server-14.04-cloudimg-amd64-disk1"
+fi
+echo imagetype: $imagetype
 NAME=$1
 OS_KEYNAME=${OS_KEYNAME?Export OS_KEYNAME to select auth key}
 
